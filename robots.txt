@@ -1,1 +1,1 @@
-Sitemap: https://modelxy.com/modelxy/sitemap.xml
+Sitemap: https://modelxy.com/sitemap.xml
