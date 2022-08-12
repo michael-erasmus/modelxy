@@ -7,6 +7,9 @@ layout: default
     <h1 class="page-heading">{{ page.title }}</h1>
   {%- endif -%}
 
+  <div class="post-header-image">
+    <img src="/images/home_header.jpg" alt="Home header, made by Midjourney">
+  </div>
   {{ content | markdownify }}
 
 
@@ -29,7 +32,7 @@ layout: default
   {% assign sticky_posts = ''|split:'' %}
   {% assign non_sticky_posts = '' | split:'' %}
 
- 
+
   {% for gp in grouped_posts %}
     {%- if gp.name == "" -%}
       {% assign non_sticky_posts = gp.items | sort: "date" | reverse %}
