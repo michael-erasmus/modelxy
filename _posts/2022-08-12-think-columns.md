@@ -23,7 +23,7 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>This is a first installment in a series of posts I plan on writing related to the basics of analytical SQL database. This content probably most useful to junior or aspriring analytics engineers.</em></p>
+<p><em>This is a first installment in a series of posts I plan on writing related to the basics of analytical SQL databases. This content probably most useful to junior or aspriring analytics engineers.</em></p>
 <p>What is a columnar database?</p>
 <p>Most well known modern data warehouses (Snowflake, BigQuery, Redshift, etc) are column-oriented, or just columnar databases. This means that unlike more mainstream SQL databases, data is stored in columns instead of rows. So for any particular table in the database, all the data for a certain column will be stored sequentially.</p>
 <p>Why does this matter? Well, this means that typical queries that you would need to do analysis could be much faster on huge datasets.</p>
