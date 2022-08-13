@@ -156,7 +156,7 @@ window.onload = wrap_img;
 <p>We often do a lot of these kinds of aggregations (<code>MIN</code>, <code>MAX</code>, <code>SUM</code>, <code>COUNT</code>, <code>AVG</code>, etc) for analytics work, which columnar databases can do really well.</p>
 <p>Another benefit of being columnar is that the database can optimize well for performing as much work in memory as possible, and easily distribute workloads in parallel onto a cluster of computers. In our query above, the DB engine only needs to load up data for the column <code>amount</code> to perform the count, and since it's all stored together, this is easy to do without having to scan the full rows.</p>
 <p>If a table has millions or even billions of records, some columnar databases can store segments of all the data in our column on different nodes in of cluster, which can individualy compute the sum of each segement seperately, which can then be tallied into a final sum fairly quickly. In this way you can scale an operation that would have been slow or even impossible on a single machine to a cluster of machines easily.</p>
-<h2 id="Why-should-care-about-if-my-database-is-columnar?">Why should care about if my database is columnar?<a class="anchor-link" href="#Why-should-care-about-if-my-database-is-columnar?"> </a></h2><p>In a lot of ways, when your using a colummar database, the database engine doesn't need you to know much about the fact that it's columnar at all. On the surface, you can access it very much like you would a row-oriented database such as PostgreSQL. At a semantic level, most database entities and queries will appear almost identical. You'll can also stick to the familiar SQL database nomenclature, using terms such as <em>tables</em>, <em>rows</em>, <em>columns</em> and <em>fields</em>.</p>
+<h2 id="Why-should-care-about-if-my-database-is-columnar?">Why should care about if my database is columnar?<a class="anchor-link" href="#Why-should-care-about-if-my-database-is-columnar?"> </a></h2><p>In a lot of ways, when your using a colummar database, the database engine doesn't need you to know much about the fact that it's columnar at all. On the surface, you can access it very much like you would a row-oriented database such as PostgreSQL. At a semantic level, most database entities and queries will appear almost identical. You can also stick to the familiar SQL database nomenclature, using terms such as <em>tables</em>, <em>rows</em>, <em>columns</em> and <em>fields</em>.</p>
 <p>Columnar databases do, however, significantly change the way you think about modeling and querying data. Even though you don't have to be concerned about the low-level details (unless you're interested), having a high-level understanding of the important concepts will help guide and inform your decisions on how you ingest, store and query your data.</p>
 <p>For instance, in a columnar database, it's fine to have a huge table with many columns that might be sparsely populated. As long as your not selecting a lot of columns at once, and only performing aggregations on certain columns, this will still be super performant.</p>
 <p>Since tables can have many columns, you might not need to normalize data as much, which is also a great win for analytics.</p>
@@ -246,6 +246,15 @@ This function will loop through each transaction, read the <code>amount</code> a
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This Python code crudely implements the same thing as this SQL query would do:</p>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="k">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="k">from</span> <span class="n">transactions</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's benchmark this function. We create a <code>benchmark</code> function that will run our query 1 million times and see how long it takes to run.</p>
